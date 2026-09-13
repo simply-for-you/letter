@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+!
+    <title>A Little Letter For You 🤍</title>
+
+    <style>
+
+        * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            background: 
+                radial-gradient(circle at top, #9b1c31, #4a0b18 55%, #21040a);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND */
+      
+        .background {     
+             position: fixed;
+             inset: 0;
+             overflow: hidden;
+             position-anchor: none;
+             z-index: 0;
+        }
+
+        .glow {
+             position: absolute;
+             width: 300px;
+             height: 300px;
+             border-radius: 50%;
+             background: #ff6b81;
+             filter: blur(100px);
+             opacity: 0.15;
+             animation: glowMove 9s infinite alternatr ease-in-out;
+        }
+
+        .glow:first-child {
+            top: -120px;
+            left: -120px;
+        }
+
+        .glow:last-child {
+            right: -120px;
+            bottom: -120px;
+            background: #ffb3bd;
+        }
+
+        @keyframes glowMove {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(100px, 70px);
+            }
+        }
+
+        .floating {
+            position: absolute;   
+            color: #ffb7c2;
+            opacity: 0;
+            animation: floating 8s linear infinite;
+        }
+
+       @keyframes floating {
+
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 1;
+               }
+        
+            80% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* SCREENS */
+      
+        .screen {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: screenIn 0.7s ease;
+        }
+
+        @keyframes screenIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.97);
+            }
+          
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* CARD */
+      
+        .card {
+            width: min(92%, 700px);
+            max-height: 150vh;
+            overflow-y: auto;
+            margin: auto;
+            padding: 40px 30px;
+            border-radius: 30px;
+
+            background: rgba(75, 10, 25, 0.78);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        /* TEXT */
+      
+        .small-title {
+            font-family: Arial, sans serif;
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: #ffb8c2;
+            margin-bottom: 18px;     
+        }
+
+        h1 {
+            font-size: clamp(45px, 11vw, 75px);
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-size: clamp(30px, 7vw, 50px);
+            margin-bottom: 22px;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #ffe8eb;
+            margin: 8px 0;  
+        }
+
+        .emphasis {
+            font-weight: bold;
+            color: #fff;  
+        }
+
+        /* BUTTONS */
+      
+        button {
+            margin: 25px 7px 0;
+
+            padding: 15px 30px;
+
+            border: none;
+            border-radius: 50px;
+
+            background: 
+                linear-gradient(
+                    135deg,
+                    #e84c68,
+                    #a51631
+                );
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+               0 8px 25px rgba(170, 20, 50, 0.4);
+
+            transition: 0.25s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.04);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+      
+        /* PAGE 1 */
+      
+        .envelope {
+            text-align: center;
+            font-size: 75px;
+            margin-bottom: 10px;
+            animation: envelopeFloat infinite ease-in-out;
+        }
+
+        @keyframes enevelopeFloat {
+
+           50% {
+               transform: translateY(-8px) rotate(2deg);
+           }
+        }
+
+      /* PAGE 2 */
+
+      .question-layout {
+          display: flex;
+          align-items: center;
+          gap: 35px;
+          text-align: center;
+      }
+
+      .question-text {
+          flex: 1;
+          text-align: center;
+      }
+
+      .question-text h2 {
+          text-align: center;
+          font-size: clamp(30px, 6vw, 45px);
+          margin-bottom: 20px;
+      }
+
+      .question-text p {
+          font-size: 14px;
+          line-height: 1.6;
+          text-align: justify;
+          margin-bottom: 12px;
+      }
+
+      .achivement {
+          width: 170px;
+          min-width: 150px;
+
+          padding: 25px 15px;
+
+          border-radius: 20px;
+
+          background: 
+              linear-gradient(
+                  145deg,
+                  #ffd86b,
+                  #c58a19
+              );
+
+          color: #5a2500;
+        
+          cursor: pointer;
+
+          box-shadow: 
+              0 12px 35px rgba(0, 0, 0, 0.3);
+
+          animation: trophyFloat 2s infinite ease-in-out;
+        
+          transition: 0.3s ease;
+      }
+
+      .achivement:hover {
+          transform: scale(1.08) rotate(2deg);
+      }
+
+      @keyframes trophyFloat {
+
+          50% {
+              transform: translateY(-7px);
+        }
+        
+      }
+
+      .trophy {
+          text-align: center;
+          font-size: 65px;
+      }
+
+      .achievement h3 {
+          text-align: center;
+          font-family: Arial, sans serif;
+          font-size: 15px;
+          margin-top: 8px;
+      }
+
+      .achievement p {
+          text-align: center;
+          color: #5a2500;
+          font-size: 13px;
+          line-height: 1.3;
+      }
+
+      .click-hint {
+          text-align: center;
+          font-family: Arial, sans serif;
+          font-size: 11px;
+          margin-top: 10px;
+      }
+
+      /* PAGE 3 WRITING */
+
+      .paper {
+          text-align: justify;
+
+          background: 
+              #fff7f2;
+
+          color: #4a1119;
+
+          padding: 35px;
+
+          border-radius: 8px;
+
+          box-shadow: 
+              0 15px 50px rgba(0, 0, 0, 0.35);
+        
+          position: relative;
+      }
+
+      .paper::before {
+          content: "";
+          position: absolute;
+          inset: 10px;
+          border: 1px solid #e7b9bd;
+          pointer-events: none;
+      } 
+
+      .paper-title {
+          text-align: justify;
+          color: #8e1c30;
+          font-size: 25px;
+          margin-bottom: 25px;
+      }
+
+      #typedletter {
+          color: #4a1119;
+          font-size: 16px;
+          line-height: 1.9;
+          white-space: pre-line;
+          min-height: 400px;  
+      }
+
+      .typing-cursor {
+          display: inline-block;
+          width: 2px;
+          height: 20px;
+          background: #8e1c20;
+          animation: blink 0.1s infinite;
+      }
+
+      @keyframes blink {
+
+          50% {
+               opacity: 0;
+          }
+        
+      }
+
+      #nextPage3 {
+          display: none;
+      }
+
+      /* PAGE 4 */
+
+      .reminder-box {
+          margin-top: 25px;
+          padding: 22px;
+
+          border-left: 4px solid #ef67d7;
+
+          background: rgba(255, 255, 255, 0.06);
+
+          text-align: justify;
+
+          border-radius: 8px;
+      }
+
+      /* PAGE 5 */
+/* PAGE 5 */
+
+      .popup-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+          margin-bottom: 30px;   
+      }
+
+      .message-card {
+          padding: 22px 15px;
+
+          background: rgba(255, 255, 255, 0.08);
+
+          border: 1px solid rgba(255, 255, 255, 0.12);
+
+          cursor: pointer;
+
+          transition: 0.3s ease;
+      }
+      .popup-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+          margin-bottom: 30px;   
+      }
+
+      .message-card {
+          padding: 22px 15px;
+
+          background: rgba(255, 255, 255, 0.08);
+
+          border: 1px solid rgba(255, 255, 255, 0.12);
+
+          cursor: pointer;
+
+          transition: 0.3s ease;
+      }
+.message-card.opened {
+           opacity: 0.7;
+      }
+
+      .message-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.13);
+      }
+
+      .message-card:icon {
+          font-size: 30px;
+      }
+
+      .message-card p{
+          font-family: Arial, sans serif;
+          font-size: 14px;
+          margin-top: 8px;
+      }
+      .message-card.opened {
+           opacity: 0.7;
+      }
+
+      .message-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.13);
+      }
+
+      .message-card .icon {
+          font-size: 30px;
+      }
+
+      .message-card p{
+          font-family: Arial, sans serif;
+          font-size: 14px;
+          margin-top: 8px;
+      }
+
+      /* POPUP */
+
+      .popup {
+          position: fixed;
+          inset: 0;
+
+          display: none;
+
+          align-items: center;
+          justify-content: center;
+
+          padding: 20px;
+
+          background: rgba(20, 2, 6, 0.8);
+
+          backdrop-filter: blur(8px);
+
+          z-index: 100;
+      }
+
+      .popup.show {
+          display: flex;
+      }
+
+      .popup-box{
+          width: min(90%, 430px);
+
+          padding: 35px 25px;
+
+          border-radius: 25px;
+
+          background: 
+              linear-gradient(
+                  145deg,
+                  #8f1e35,
+                  #430b18
+              );
+
+          box-shadow:
+              0 20px 70px rgba(0, 0, 0, 0.5);
+
+          animation: popupIn 0.4s ease;
+      }
+
+      @keyframes popupIn {
+          
+          from {
+              transform: scale(0.7); 
+              opacity: 0; 
+          } 
+        
+          to {
+              transform: scale(1);
+              opacity: 1;
+          }
+      } 
+      
+      /* FINAL */ 
+      
+      .heart { 
+          font-size: 80px; 
+          animation: heartbeat 1.5s infinite; 
+      } 
+      
+      @keyframes heartbeat { 
+        
+          50% { 
+              transform: scale(1.15); 
+          } 
+      } 
+      
+      .final-message {
+          margin-top: 20px;
+      } 
+      
+      /* MOBILE */ 
+      
+      @media (max-width: 600px) { 
+        
+          .card { 
+              padding: 35px 20px; 
+          } 
+        
+          .question-layout { 
+              display: flex;
+              flex-direction: column; 
+              text-align: justify;
+          } 
+        
+          .achievement {
+              width: 180px; 
+          } 
+      
+          .popup-grid { 
+              grid-template-columns: 1fr;
+          } 
+        
+          .paper {
+              padding: 25px 20px; 
+          } 
+        
+          #typedLetter { 
+              font-size: 14px; 
+              min-height: 500px;
+          }
+
+          button { 
+              width: 80%; 
+          }
+        
+      } 
+
+    
+
+      /* PAGE 1 */
+        
+       #page1 .card {
+             text-align: center;
+       }
+
+      #page1 .card h1,
+      #page1 .card p,
+      #page1 .card .small-title {
+            text-align: center;
+      }
+     
+      #page1 .card button {
+           display: block;
+           margin: 12px auto;
+      }
+
+     #page1 .envelope {
+          text-align: center;
+          width: 100%;
+      }
+
+    
+    </style>
+</head>
+
+
+
+<body> 
+
+  <audio id="bgMusic" loop>
+    <source src="music1.mp3" type="audio/mpeg">
+</audio>
+  
+  <!-- BACKGROUND --> 
+  
+  <div class="background">
+    
+    <div class="glow"></div>
+    <div class="glow"></div>
+      
+  </div>
+  
+  <!-- PAGE 1 -->
+  
+  <section class="screen active" id="page1">
+    
+    <div class="card"> 
+      
+      <div class="envelope"> 
+        💌 
+      </div> 
+      
+      <div class="small-title"> 
+        YOU RECEIVED A LETTER
+      </div>
+      
+      <h1> 
+        Hello! 
+      </h1> 
+      
+      <p> 
+        Someone left a letter for you.
+      </p> 
+      
+      <p> 
+        Would you like to proceed?
+      </p> 
+      
+      <button onclick="yesClicked()">
+        Yes 
+      </button>
+      
+      <button id="noButton" onclick="noClicked()"> 
+        No 
+      </button> 
+      
+    </div>
+  
+  </section>
+  
+  <!-- PAGE 2 -->
+  
+  <section class="screen" id="page2"> 
+    
+    <div class="card"> 
+      
+      <div class="small-title"> 
+        BEFORE YOU CONTINUE... 
+      </div> 
+      
+      <div class="question-layout">
+        
+        <div class="question-text"> 
+          
+          <h2> 
+            Did you do your best? 
+          </h2> 
+          
+          <p> 
+            Maybe you got the result you were hoping for.  Maybe you didn't.
+          </p>
+          
+          <p> 
+            Maybe you're proud of yourself,  or maybe you're wondering if you could have done more.
+          </p> 
+          
+          <p> 
+            But before you judge yourself by a grade, 
+            a number, an award, or a title, I want you 
+            to remember something.
+          </p> 
+          
+          <p class="emphasis">
+            You tried. You showed up. You kept going. 
+          </p> 
+          
+          <p> 
+            And sometimes, doing your best doesn't 
+            mean getting everything right. Sometimes
+            it simply means continuing even when you
+            were tired, frustrated, nervous, or unsure 
+            of yourself.
+          </p> 
+          
+          <p>
+            Whether you received recognition or not,
+            your effort still matters.
+          </p
+            
+          <p class="emphasis"> 
+            And I'm proud of you either way. 🤍 
+          </p> 
+          
+        </div> 
+        
+        
+        <div class="achievement" onclick="openCertificate()">
+          
+          <div class="trophy"> 
+            🏆 
+          </div> 
+          
+          <h3> 
+            A LITTLE AWARD 
+          </h3> 
+          
+          <p>
+            For doing your best.
+          </p> 
+          
+          <div class="click-hint">
+            CLICK ME 
+          </div> 
+        </div> 
+      </div>
+    </div> 
+    
+  </section> 
+
+
+  
+  <!-- PAGE 3 -->
+  
+  <section class="screen" id="page3">
+    
+    <div class="card"> 
+      
+      <div class="paper"> 
+        
+        <div class="paper-title"> 
+          A Letter For You:
+        </div> 
+        
+        <div id="typedLetter"></div>
+        
+      </div> 
+      
+      <button id="nextPage3" 
+        onclick="showPage('page4')">
+        
+        Next →  
+        
+      </button>
+      
+    </div> 
+    
+  </section>
+
+
+  
+  <!-- PAGE 4 --> 
+  
+  <section class="screen" id="page4"> 
+    
+    <div class="card"> 
+      
+      <div class="small-title"> 
+        HEY. WAIT A SECOND. 
+      </div> 
+      
+      <h2> 
+        Remember this.  
+      </h2>
+      
+      <p> 
+        Don't let one result decide how you
+        feel about yourself. 
+      </p>
+      
+      <p> 
+        Sometimes we look at what other people 
+        accomplished and immediately wonder why we 
+        aren't doing the same. 
+      </p> 
+      
+      <div class="reminder-box">
+        
+        <p> 
+          We compare grades, achievements, awards
+          and progress without knowing how different
+          everyone's journey really is. 
+        </p>
+        
+        <p> 
+          But your life isn't a competition. 
+        </p>
+        
+        <p> 
+          Someone else's success doesn't make
+          yours smaller. 
+        </p> 
+        
+        <p> 
+          Someone else's achievement doesn't mean
+          you're falling behind.
+        </p> 
+    
+      </div> 
+      
+      <p> 
+        And not getting the result you wanted doesn't 
+        mean you failed. 
+      </p> 
+      
+      <p> 
+        You're allowed to be disappointed. You're 
+        allowed to wish you had done something differently.
+      </p> 
+      
+      <p class="emphasis"> 
+        But don't let that disappointment convince you that 
+        you aren't capable. 
+      </p> 
+      
+      <p> 
+        You are still learning. You're still growing. You 
+        still have so much ahead of you.
+      </p> 
+      
+      <button onclick="showPage('page5')"> 
+        I'll remember that 💕 
+        
+      </button> 
+      
+    </div> 
+  
+  </section> 
+  
+  
+ 
+  
+  <!-- PAGE 5 -->
+
+<section class="screen" id="page5">
+
+    <div class="card">
+
+        <div class="small-title">
+            LITTLE REMINDERS
+        </div>
+
+        <h2>
+            Open these. 💌
+        </h2>
+
+        <p>
+            I left a few little messages for you. You can click them in any order.
+        </p>
+
+        <div class="popup-grid">
+
+            <div class="message-card"
+                 onclick="showMessage(this, 'Psalm 23:4 — God is with you even through difficult seasons. 🛶')">
+                <div class="icon">🛶</div>
+            </div>
+
+            <div class="message-card"
+                 onclick="showMessage(this, '2 Corinthians 4:8–9 — Even when life is difficult, you are not abandoned. 🫂')">
+                <div class="icon">🫂</div>
+            </div>
+
+            <div class="message-card"
+                 onclick="showMessage(this, 'Ecclesiastes 3:11 — There is a proper time for everything. 💫')">
+                <div class="icon">💫</div>
+            </div>
+
+            <div class="message-card"
+                 onclick="showMessage(this, 'Matthew 6:34 — Do not worry too much about tomorrow; take life one day at a time. 🧩')">
+                <div class="icon">🧩</div>
+            </div>
+
+            <div class="message-card"
+                 onclick="showMessage(this, 'Psalm 37:23–24 — God guides your steps and holds you when you stumble. 🍀')">
+                <div class="icon">🍀</div>
+            </div>
+
+        </div>
+
+        <button onclick="showPage('final')">
+    Continue →
+</button> 
+            
+        
+
+    </div>
+
+  
+
+</section>
+  
+  <!-- FINAL PAGE --> 
+  
+  <section class="screen" id="final"> 
+    
+    <div class="card">
+      
+      <div class="heart"> 
+        🤍
+      </div> 
+      
+      <div class="small-title"> 
+        Last Thing
+      </div> 
+      
+      <h2> 
+        For whatever comes next. 
+      </h2> 
+      
+      <div class="final-message">
+
+        <p> 
+          Maybe this is something you'll need to hear
+          more than once. 
+        </p> 
+        
+        <p> Life isn't always going to go exactly the way you
+          planned. 
+        </p>
+        
+        <p> 
+          There will be days when you feel like you're doing everything
+          right, and days when you feel completely lost. 
+        </p> 
+        
+        <p>
+          There will be moments you're proud of yourself and moments when 
+          you wish you could go back and do things differently. 
+        </p> 
+        
+        <p class="emphasis"> 
+          But that's okay. 
+        </p>
+        
+        <p>
+          You don't have to have your whole life figured out right now.
+        </p> 
+        
+        <p>
+          You don't have to know exactly where you're going. 
+        </p> 
+        
+        <p> 
+          Just keep moving. Keep learning. Keep growing. Keep choosing to try again.
+        </p>
+        
+        <p>
+          Don't be too hard on yourself for not being where you thought you'd be. 
+          Sometimes life takes unexpected turns, and sometimes the things that don't 
+          work out end up teaching us something we needed to learn.
+        </p>
+        
+        <p> 
+          Celebrate your good days. Be gentle with yourself on the bad ones. 
+        </p> 
+        
+        <p> 
+          And remember that your worth isn't measured by your achievements. 
+        </p> 
+        
+        <p class="emphasis"> 
+          I'm so proud of you for doing your best.
+        </p>
+        
+        <p> 
+          Not because you were perfect.
+        </p> 
+        
+        <p>
+          Not because everything went right. 
+        </p>
+        
+        <p class="emphasis"> 
+          But because you kept going.
+        </p> 
+        
+        <p> And whatever comes next, I hope you remember that you have so much 
+          more life ahead of you. 🤍
+        </p> 
+        
+        <p class="emphasis">
+          I'm proud of you. 
+        </p> 
+      
+      </div> 
+      
+      <button onclick="location.reload()"> 
+        Read it again? ↻ 
+      
+      </button> 
+    
+    </div>
+
+  </section>
+  
+  <!-- POPUP --> 
+  
+  <div class="popup" id="popup">
+    
+    <div class="popup-box"> 
+      
+    <h2 
+      id="popupTitle"> 
+      🤍
+    </h2> 
+      <p
+        id="popupText"> 
+      </p> 
+      <button onclick="closePopup()"> 
+        Okay 🤍
+      </button> 
+    
+    </div> 
+  
+  </div> 
+
+
+  <script>
+
+
+    /* PAGE SWITCH */
+    
+    function showPage(pageID) { 
+      document 
+        .querySelectorAll(".screen")
+        .forEach(function(page) {
+          
+          page.classList.remove("active"); 
+      
+        });
+      
+      document 
+        .getElementById(pageID)
+        .classList.add("active"); 
+      
+      window.scrollTo({ 
+        top: 0,
+        behavior: "smooth" 
+      });
+    
+    } 
+
+  
+    /* PAGE 1 YES */
+    function yesClicked() {
+    const music = document.getElementById("bgMusic");
+
+    music.volume = 0.5;
+
+    music.play()
+        .then(function() {
+            console.log("Music playing!");
+        })
+        .catch(function(error) {
+            console.log("Music error:", error);
+        });
+
+    showPage("page2");
+}
+    
+    /* PAGE 1 NO */
+    function noClicked() {
+    const button = document.getElementById("noButton");
+
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.5;
+    music.play();
+
+    button.innerText = "YES";
+
+    button.onclick = function() {
+        showPage("page2");
+    };
+
+    showPopup(
+        "You can't run away :)",
+        "Nice try. But this letter is finding you anyway."
+    );
+}
+    
+    
+    /* CERTIFICATE */ 
+    
+    let certificateNext = false;
+
+function openCertificate() {
+    certificateNext = true;
+
+    showPopup(
+        "🏆 Certificate of Being Awesome",
+        "This certificate is awarded to you for trying, continuing, learning, growing, and doing your best. Whether you received honors or not, your effort is something worth celebrating. ❤️"
+    );
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("show");
+
+    if (certificateNext) {
+        certificateNext = false;
+        showPage("page3");
+        startTyping();
+    }
+}
+        
+    
+/* POPUP */
+
+let openedCard = null;
+
+function showPopup(title, text) {
+
+    document.getElementById("popupTitle").innerText = title;
+
+    document.getElementById("popupText").innerText = text;
+
+    document.getElementById("popup").classList.add("show");
+}
+
+function showMessage(card, message) {
+
+    openedCard = card;
+
+    showPopup(
+        "A Little Reminder 💌",
+        message
+    );
+
+    document.getElementById("popupButton").innerText = "Go Back";
+}
+
+function closePopup() {
+
+    document.getElementById("popup").classList.remove("show");
+
+    if (openedCard !== null) {
+
+        openedCard.classList.add("opened");
+
+        openedCard = null;
+    }
+
+    if (certificateNext) {
+
+        certificateNext = false;
+
+        showPage("page3");
+
+        startTyping();
+    }
+}
+
+    
+    
+    
+
+
+    /* PAGE 4 TYPEWRITER */ 
+    
+    const letterText = `Hey, 
+    I hope you know that you don't always have to accomplish something big for someone to be proud of you.
+    
+    You don't have to have the highest grades, win every competition, or have everything figured out. 
+    
+    I'm proud of you for the little things too. I'm proud of you for getting through the days when you didn't feel like doing anything.
+    
+    I'm proud of you for trying again after making mistakes. I'm proud of you for learning, growing, and becoming a little stronger through every experience.
+    
+    I'm proud of you for the moments when you chose to keep going even when things weren't exactly how you wanted them to be.
+    
+    And I hope you never think that one result can erase all the effort you put in. 
+    
+    Maybe you succeeded.
+    Maybe things didn't go according to plan.
+   
+    Either way, it doesn't change the fact that you tried. You don't have to be perfect to make someone proud. You don't have to prove yourself all the time. 
+    
+    You don't have to compare your journey to someone else's. 
+    
+    Your journey is yours. 
+    Take your time. 
+    Learn at your own pace. 
+    Make mistakes. 
+    Try again. 
+    Celebrate your little wins.
+    And most importantly, remember that there are people who are genuinely proud of you simply for being you. 
+    So if today didn't go exactly the way you hoped, that's okay. There are still so many days ahead of you.
+    
+    You still have so much to learn, so many things to experience, and so many moments waiting for you. You are still becoming the person you're meant to be. And honestly? 
+   
+    I'm proud of you.
+    
+    Always. ❤️‍🩹`; 
+
+    
+    let typingStarted = false;
+
+     function startTyping() {
+
+    if (typingStarted) {
+        return;
+    }
+
+    typingStarted = true;
+
+    const element = document.getElementById("typedLetter");
+
+    element.innerHTML = "";
+
+    let index = 0;
+
+    const cursor = document.createElement("span");
+    cursor.className = "typing-cursor";
+    cursor.textContent = "|";
+
+    element.appendChild(cursor);
+
+    function typeCharacter() {
+
+        if (index < letterText.length) {
+
+            cursor.insertAdjacentText(
+                "beforebegin",
+                letterText.charAt(index)
+            );
+
+            index++;
+
+            setTimeout(typeCharacter, 30);
+
+        } else {
+
+            document.getElementById("nextPage3").style.display = "inline-block";
+
+        }
+    }
+
+    typeCharacter();
+}
+      
+      /* FLOATING DECORATIONS */ 
+    
+    function createFloating() {
+      
+      const symbols = [
+        "♡", 
+        "♥", 
+        "✦", 
+        "✧", 
+        "•" 
+      ];
+
+      const item = 
+        document.createElement("div");
+      
+      item.className = 
+        "floating"; 
+      
+      item.innerText =
+        symbols[
+        Math.floor( 
+          Math.random() 
+          * symbols.length 
+        ) 
+        ];
+      
+      item.style.left =
+        Math.random() * 100 + "%";
+      
+      item.style.fontSize =
+        (12 + Math.random() * 20) + "px"; 
+      
+      item.style.animationDuration = 
+        (5 + Math.random() * 7) + "s";
+      
+      item.style.animationDelay = 
+        Math.random() * 5 + "s"; 
+      
+      document 
+        .querySelector(".background") 
+        .appendChild(item);
+    
+    } 
+    
+    
+    for ( 
+      let i = 0;
+      i < 25;
+      i++ 
+    ) {
+      
+      createFloating(); 
+    
+    
+    } 
+  
+  
+  </script> 
+
+
+</body>
+</html>
